@@ -1,12 +1,12 @@
 # at32f435-board
 
-[![at32f435 board](doc/at32f435-board/picture_small.webp)](doc/at32f435-board/picture_small.webp)
+[![at32f435 board](doc/at32f435-board/picture_small.webp)](doc/at32f435-board/picture.webp)
 
 This git is the firmware for an arm  development board. The [hardware project](https://oshwlab.com/koendv/at32f435-board) is at oshwlab.
 
 ## goal
 
-A small device handheld device, with enough free flash, ram, and board space for my projects.  
+A small handheld device, with enough free flash, ram, and board space for my projects.
 
 ## hardware
 
@@ -20,12 +20,12 @@ A small device handheld device, with enough free flash, ram, and board space for
 - battery backup for the real-time clock.
 - One full-speed USB, 12 MBit/s.
 - CAN bus, 1 Mbit/s.
-- JST connectors for GPIO, I2C, SPI and CAN. 
-- between processor and JST connectors there is room for custom hardware. 
+- JST connectors for GPIO, I2C, SPI and CAN.
+- between processor and JST connectors there is room to add electronics for a project.
 
 The cable for the connectors is a "JST SH 1.0mm to Dupont".
 
-[easyeda](https://easyeda.com/) was used to draw the schematic and the pcb. [jlcpcb](https://jlcpcb.com/) assembled the board and 3D-printed the enclosure. The hardware project is at [oshwlab](https://oshwlab.com/koendv/at32f435-board).
+[easyeda](https://easyeda.com/) was used to draw the schematic and the pcb. [jlcpcb](https://jlcpcb.com/) assembled the board and 3D-printed the enclosure.
 
 ## display
 
@@ -35,7 +35,7 @@ The capacitive touch screen is from a smartwatch, and uses [LVGL](https://lvgl.i
 
 Notes about [compiling the firmware](COMPILING.md).
 
-# ordering
+## ordering
 
 Notes about [ordering assembled pcb's](ORDERING.md) and 3d-printed enclosure from jlcpcb.
 

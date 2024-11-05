@@ -39,7 +39,7 @@ scons
 
 The firmware can be installed using device firmware upgrade DFU, openocd or black magic probe.
 
-- DFU
+### DFU
 
  using [dfu-util](https://dfu-util.sourceforge.net/). To install using dfu-util:
 
@@ -85,14 +85,14 @@ SUBSYSTEMS=="usb", ATTRS{idVendor}=="2e3c", ATTRS{idProduct}=="df11", TAG+="uacc
 
 Windows users: If dfu-util does not see the at32, download [zadig](https://zadig.akeo.ie/), install the WinUSB driver and run dfu-util again.
 
-- OpenOCD
+### OpenOCD
 
 Using [openocd](https://github.com/ArteryTek/openocd) from ArteryTek. Connect a CMSIS-DAP probe to the AT32F435 SWD port.  Command line:
 ```sh
 openocd -f interface/cmsis-dap.cfg -f scripts/target/at32f435xx.cfg
 ```
 
-- Black Magic Probe
+### Black Magic Probe
 
 Using [black magic probe](https://black-magic.org/index.html).  With the file `rtthread.elf` in your current directory, connect black magic probe to the AT32F435 SWD port. Command line:
 
@@ -139,7 +139,7 @@ initialized finish.
 boot
 msh />[I/LVGL] [Info]   (0.000, +0)      lv_init: begin lv_init.c:139
 ```
-Console output then continues on the usb serial:
+Console output then continues on the usb serial.
 ```
 msh />free
 total    : 498800

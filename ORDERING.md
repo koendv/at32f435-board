@@ -18,7 +18,7 @@ These are my notes how to order the pcb's.
 - In browser, open [jlcpcb.com](https://jlcpcb.com/). Choose "JLC3DP - 3D printing". Click "Quote Now".
 - In browser, click "Add 3D Files". Choose files "3DShell_3DShell_PCB1_T.stl" and "3DShell_3DShell_PCB1_B.stl".
 - Choose 3D Technology: SLA (Resin)
- - Choose Material: 9600 Resin (white, cheapest).
+ - Choose Material: JLC Black Resin.
  - Choose Shipping: Global Standard Direct Line.
  - Warning appears: "smaller than 0.8mm wall thickness detected. There might be risks of crack, damage, deformation, loss of details. Are you able to take the risks?". Choose "yes".
  - Order.
@@ -50,4 +50,5 @@ These are my notes how to order the pcb's.
 ## Order display
  
  - P169H002 capacitive touch screen from [aliexpress](https://aliexpress.com/wholesale?SearchText=P169H002&sortType=total_tranpro_desc).
+ - in passing, order JST SH 1.0mm to Dupont cables, also from aliexpress.
  
