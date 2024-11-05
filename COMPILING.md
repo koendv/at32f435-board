@@ -115,6 +115,7 @@ Transfer rate: 23 KB/sec, 971 bytes/write.
 
 When the board boots, console output is on the serial port. If the board is connected to usb, the console then switches to the usb serial.
 
+Console output begins on the UART1 serial port:
 ```
  \ | /
 - RT -     Thread Operating System
@@ -139,7 +140,7 @@ initialized finish.
 boot
 msh />[I/LVGL] [Info]   (0.000, +0)      lv_init: begin lv_init.c:139
 ```
-Console output then continues on the usb serial.
+Console output then continues on the usb serial, and the shell prompt appears:
 ```
 msh />free
 total    : 498800
