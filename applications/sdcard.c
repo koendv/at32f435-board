@@ -84,16 +84,16 @@ static void sd_detect()
     struct statfs fs_stat;
 
     sdcard_detected = rt_pin_read(SD_DETECT_PIN) == PIN_LOW;
-    sdcard_mounted  = dfs_statfs(SD_DIR, &fs_stat) == 0;
 
-    if (sdcard_detected && !sdcard_mounted)
+    if (sdcard_detected)
         sd_mount();
-    else if (!sdcard_detected && sdcard_mounted)
+    else
         sd_unmount();
 }
 
 void sd_mount()
 {
+    LOG_I("sd_mount");
     // switch sd card power on
     rt_pin_write(SD_ON_PIN, PIN_HIGH);
     // wait for power up
@@ -112,6 +112,7 @@ void sd_mount()
 
 void sd_unmount()
 {
+    LOG_I("sd_unmount");
 #ifndef RT_USING_DFS_MNTTABLE
     // unmount sd card
     if (dfs_unmount(SD_DIR) != 0)
@@ -139,7 +140,7 @@ void sd_init()
     rt_pin_write(SD_ON_PIN, PIN_LOW);
     rt_pin_mode(SD_ON_PIN, PIN_MODE_OUTPUT);
 
-    rt_pin_mode(SD_DETECT_PIN, PIN_MODE_INPUT_PULLUP);
+    rt_pin_mode(SD_DETECT_PIN, PIN_MODE_INPUT);
     rt_pin_attach_irq(SD_DETECT_PIN, PIN_IRQ_MODE_RISING_FALLING, sd_detect_handler, RT_NULL);
     rt_pin_irq_enable(SD_DETECT_PIN, PIN_IRQ_ENABLE);
 }

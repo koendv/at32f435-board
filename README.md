@@ -6,7 +6,7 @@ This git is the firmware for an arm  development board. The [hardware project](h
 
 ## goal
 
-A small handheld device, with enough free flash, ram, and board space for my projects.
+A small handheld device, with enough resources for projects.
 
 ## hardware
 
@@ -21,7 +21,8 @@ A small handheld device, with enough free flash, ram, and board space for my pro
 - One full-speed USB, 12 MBit/s.
 - CAN bus, 1 Mbit/s.
 - JST connectors for GPIO, I2C, SPI and CAN.
-- between processor and JST connectors there is room to add electronics for a project.
+
+There is space between the processor in the middle and the connectors at the bottom. This is where you can add electronics for a project.
 
 The cable for the connectors is a "JST SH 1.0mm to Dupont".
 
