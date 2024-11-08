@@ -33,7 +33,7 @@ int main(void)
     /* set led1 pin mode to output */
     rt_pin_mode(LED1_PIN, PIN_MODE_OUTPUT);
 
-#if defined(PKG_USING_VCONSOLE) && defined(RT_VCOM_SERNO)
+#if defined(PKG_USING_VCONSOLE) && defined(RT_USB_DEVICE_CDC)
     /* on legacy usb stack: switching console to usb serial */
     rt_device_t vcom_dev = RT_NULL;
     vcom_dev             = rt_device_find("vcom");
