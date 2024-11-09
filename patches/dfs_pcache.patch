@@ -1,18 +1,17 @@
 diff --git a/components/dfs/dfs_v2/src/dfs_pcache.c b/components/dfs/dfs_v2/src/dfs_pcache.c
-index 6868170b9c..e9ac67fc21 100644
+index 6868170b9c..e022bdbc61 100644
 --- a/components/dfs/dfs_v2/src/dfs_pcache.c
 +++ b/components/dfs/dfs_v2/src/dfs_pcache.c
-@@ -12,6 +12,9 @@
- #define DBG_TAG "dfs.pcache"
+@@ -13,6 +13,8 @@
  #define DBG_LVL DBG_WARNING
  #include <rtdbg.h>
-+#include <rtconfig.h>
-+
-+#ifdef RT_USING_PAGECACHE
  
++#ifdef RT_USING_PAGECACHE
++
  #include <dfs_pcache.h>
  #include <dfs_dentry.h>
-@@ -23,8 +26,6 @@
+ #include <dfs_mnt.h>
+@@ -23,8 +25,6 @@
  
  #include <rthw.h>
  
