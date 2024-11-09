@@ -53,7 +53,7 @@ void sd_print()
     sdcard_detected = rt_pin_read(SD_DETECT_PIN) == PIN_LOW;
     sdcard_mounted  = dfs_statfs(SD_DIR, &fs_stat) == 0;
 
-    LOG_I("SD card %sdetected, %smounted",
+    LOG_I("sd card %sdetected, %smounted",
           sdcard_detected ? "" : "not ",
           sdcard_mounted ? "" : "not ");
 }
@@ -93,14 +93,14 @@ static void sd_detect()
 
 void sd_mount()
 {
-    LOG_I("sd_mount");
+    LOG_I("sd card mount");
     // switch sd card power on
     rt_pin_write(SD_ON_PIN, PIN_HIGH);
     // wait for power up
-    rt_thread_mdelay(300);
+    rt_thread_mdelay(500);
     // mount sd card
     at32_mmcsd_change();
-    if (mmcsd_wait_cd_changed(1000) == -RT_ETIMEOUT)
+    if (mmcsd_wait_cd_changed(2 * RT_TICK_PER_SECOND) == -RT_ETIMEOUT)
         LOG_E("sd card init fail");
 #ifndef RT_USING_DFS_MNTTABLE
     if (dfs_mount(SD_DEVICE, SD_DIR, "elm", 0, 0) != 0)
@@ -112,26 +112,41 @@ void sd_mount()
 
 void sd_unmount()
 {
-    LOG_I("sd_unmount");
+    LOG_I("sd card unmount");
 #ifndef RT_USING_DFS_MNTTABLE
     // unmount sd card
+    // in dfs_v2 use dfs_mnt_destroy() instead
     if (dfs_unmount(SD_DIR) != 0)
         LOG_E("sd card unmount fail");
-    else
-        LOG_I("sd card unmounted");
 #endif
     // sdcard power off
     rt_pin_write(SD_ON_PIN, PIN_LOW);
     // sdio shutdown
     at32_mmcsd_change();
-    if (mmcsd_wait_cd_changed(1000) == -RT_ETIMEOUT)
+    if (mmcsd_wait_cd_changed(2 * RT_TICK_PER_SECOND) == -RT_ETIMEOUT)
         LOG_E("sdcard change fail");
     sd_print();
 }
 
+/* mount sd card in background */
+static void sd_mount_thread()
+{
+    if (rt_pin_read(SD_DETECT_PIN) == PIN_HIGH)
+    {
+        LOG_I("no sd card");
+        return;
+    }
+    rt_pin_write(SD_ON_PIN, PIN_HIGH);
+    rt_thread_mdelay(1000);
+    sd_mount();
+}
+
 void sd_init()
 {
+    rt_thread_t sd_mount_threadid = RT_NULL;
+
     sd_detect_sem = rt_sem_create("sd detect", 0, RT_IPC_FLAG_FIFO);
+    rt_sem_control(sd_detect_sem, RT_IPC_CMD_SET_VLIMIT, (void *)1);
 
     sd_detect_threadid = rt_thread_create("sd detect", sd_detect_thread, RT_NULL, 1024, 5, 10);
     if (sd_detect_threadid != RT_NULL)
@@ -143,6 +158,11 @@ void sd_init()
     rt_pin_mode(SD_DETECT_PIN, PIN_MODE_INPUT);
     rt_pin_attach_irq(SD_DETECT_PIN, PIN_IRQ_MODE_RISING_FALLING, sd_detect_handler, RT_NULL);
     rt_pin_irq_enable(SD_DETECT_PIN, PIN_IRQ_ENABLE);
+
+    /* mount sdcard in background */
+    sd_mount_threadid = rt_thread_create("sd mount", sd_mount_thread, RT_NULL, 1024, 5, 10);
+    if (sd_mount_threadid != RT_NULL)
+        rt_thread_startup(sd_mount_threadid);
 }
 
 MSH_CMD_EXPORT_ALIAS(sd_mount, sdmount, mount sd card);
