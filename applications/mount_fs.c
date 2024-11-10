@@ -89,7 +89,7 @@ int mount_fs(void)
     if (mount_romfs() != RT_EOK) return -RT_ERROR;
     mount_spiflash();
 #if defined(RT_USING_SDIO) && defined(BSP_USING_SDIO)
-    sd_init();
+    sdcard_init();
 #endif
 }
 
