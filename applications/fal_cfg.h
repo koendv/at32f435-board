@@ -14,7 +14,8 @@
 #include <rtconfig.h>
 #include <board.h>
 
-#define NOR_FLASH_DEV_NAME             "norflash0"
+#define NOR_FLASH_DEV_NAME "norflash0"
+#define PARTITION1_NAME    "part1"
 
 /* ===================== Flash device Configuration ========================= */
 extern struct fal_flash_dev nor_flash0;
@@ -27,9 +28,9 @@ extern struct fal_flash_dev nor_flash0;
 /* ====================== Partition Configuration ========================== */
 #ifdef FAL_PART_HAS_TABLE_CFG
 /* partition table */
-#define FAL_PART_TABLE                                                               \
-{                                                                                    \
-    {FAL_PART_MAGIC_WORD, "filesystem", NOR_FLASH_DEV_NAME,         0, 16*1024*1024, 0}, \
+#define FAL_PART_TABLE                                                              \
+{                                                                                   \
+    {FAL_PART_MAGIC_WORD, PARTITION1_NAME, NOR_FLASH_DEV_NAME, 0, 16*1024*1024, 0}, \
 }
 #endif /* FAL_PART_HAS_TABLE_CFG */
 

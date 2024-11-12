@@ -5,6 +5,7 @@
 #include <dfs_romfs.h>
 #include <drv_spi.h>
 #include <fal.h>
+#include <fal_cfg.h>
 #include "sdcard.h"
 #include "pinout.h"
 
@@ -19,8 +20,6 @@
  * then add to .config:
  * CONFIG_RT_DFS_ELM_MAX_SECTOR_SIZE=4096
  */
-
-#define PARTITION1_NAME "filesystem"
 
 static const struct romfs_dirent _romfs_root[] =
     {
