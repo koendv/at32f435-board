@@ -20,5 +20,5 @@
 
 - dfs_pcache.patch
 
-    Allows compiling dfs_v2 on systems without memory management unit. (no mmu.h)
+    [PR](https://github.com/RT-Thread/rt-thread/pull/9645) fix dfs_pcache compilation error if no mmu.h
 
