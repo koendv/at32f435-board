@@ -46,7 +46,8 @@ Notes about [ordering assembled pcb's](ORDERING.md) and 3d-printed enclosure fro
 ## links
 
 - [P169H002](https://aliexpress.com/wholesale?SearchText=P169H002&sortType=total_tranpro_desc) capacitive touch screen
-- [easyeda](https://easyeda.com/) CAD software
+- [easyeda](https://easyeda.com/) and [lceda](https://lceda.cn/) CAD software
 - [LCSC](https://www.lcsc.com/) and [SZLCSC](https://www.szlcsc.com/) electronics components
+- [jlcdfm](https://jlcdfm.com/) design for manufacturing
 - [jlcpcb](https://jlcpcb.com/) pcb assembly and 3D printing
 - [oshwlab](https://oshwlab.com) and [oshwhub](https://oshwhub.com/) open hardware projects
