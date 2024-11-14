@@ -143,11 +143,20 @@ msh />[I/LVGL] [Info]   (0.000, +0)      lv_init: begin lv_init.c:139
 Console output then continues on the usb serial, and the shell prompt appears:
 ```
 msh />free
-total    : 498800
-used     : 82992
-maximum  : 83160
-available: 415808
+total    : 498736
+used     : 86672
+maximum  : 92184
+available: 412064
 msh />
+```
+Insert an sd card:
+```
+[I/SDCARD] sd card inserted
+[I/SDIO] SD card capacity 7761920 KB.
+[I/SDIO] sd: switch to High Speed / SDR25 mode
+[D/SDIO] probe mmcsd block device!
+found part[0], begin: 0, size: 7.411GB
+[I/SDCARD] sd card inserted, mounted
 ```
 
 rt-thread also supports console output on SEGGER RTT.

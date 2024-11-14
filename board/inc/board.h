@@ -46,6 +46,9 @@ extern int __bss_end;
 /* for at32cxx package */
 #define EE_TYPE                         AT24C256
 
+/* for sdcard. suggested values: 12Mhz, 24MHz, 48MHz */
+#define SDIO_MAX_FREQ                   (24000000)
+
 void system_clock_config(void);
 
 #ifdef __cplusplus
