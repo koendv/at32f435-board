@@ -1,6 +1,6 @@
 # at32f435-board
 
-[![at32f435 board](doc/at32f435-board/picture_small.webp)](doc/at32f435-board/picture.webp)
+[![at32f435 board](doc/at32f435-board/picture_small.webp)](https://raw.githubusercontent.com/koendv/at32f435-board/refs/heads/main/doc/at32f435-board/picture.webp)
 
 This git is the firmware for an arm  development board. The [hardware project](https://oshwlab.com/koendv/at32f435-board) is at oshwlab.
 
@@ -39,6 +39,54 @@ Notes about [compiling the firmware](COMPILING.md).
 ## ordering
 
 Notes about [ordering assembled pcb's](ORDERING.md) and 3d-printed enclosure from jlcpcb.
+
+## running
+
+When the board boots, console output is on the serial port. If the board is connected to usb, the console then switches to the usb serial.
+
+Console output begins on the UART1 serial port:
+```
+ \ | /
+- RT -     Thread Operating System
+ / | \     5.2.0 build Nov  5 2024 07:00:04
+ 2006 - 2024 Copyright by RT-Thread team
+[I/EEPROM] AT24C256 eeprom ok
+[I/CAN] can1 canbus init ok
+[I/MOUNT] rom mount on '/' ok
+[I/SFUD] Found a Winbond flash chip. Size is 16777216 bytes.
+[I/SFUD] norflash0 flash device initialized successfully.
+[I/SFUD] Probe SPI flash norflash0 by SPI device spi20 success.
+[D/FAL] (fal_flash_init:47) Flash device |                norflash0 | addr: 0x00000000 | len: 0x01000000 | blk_size: 0x00001000 |
+initialized finish.
+[I/FAL] ==================== FAL partition table ====================
+[I/FAL] | name       | flash_dev |   offset   |    length  |
+[I/FAL] -------------------------------------------------------------
+[I/FAL] | filesystem | norflash0 | 0x00000000 | 0x01000000 |
+[I/FAL] =============================================================
+[I/FAL] RT-Thread Flash Abstraction Layer initialize success.
+[I/FAL] The FAL block device (filesystem) created successfully
+[I/MOUNT] spi flash mount on /flash ok
+boot
+msh />[I/LVGL] [Info]   (0.000, +0)      lv_init: begin lv_init.c:139
+```
+Console output then continues on the usb serial, and the shell prompt appears:
+```
+msh />free
+total    : 498736
+used     : 86672
+maximum  : 92184
+available: 412064
+msh />
+```
+Insert an sd card:
+```
+[I/SDCARD] sd card inserted
+[I/SDIO] SD card capacity 7761920 KB.
+[I/SDIO] sd: switch to High Speed / SDR25 mode
+[D/SDIO] probe mmcsd block device!
+found part[0], begin: 0, size: 7.411GB
+[I/SDCARD] sd card inserted, mounted
+```
 
 ## changelog
 [Changelog](CHANGELOG.md) where I keep track of progress.

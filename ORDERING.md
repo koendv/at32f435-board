@@ -1,15 +1,26 @@
 # Ordering
 
-These are my notes how to order the pcb's.
+[![at32f435 board](doc/at32f435-board/picture_small.webp)](https://raw.githubusercontent.com/koendv/at32f435-board/refs/heads/main/doc/at32f435-board/picture.webp)
+
+Notes how to order pcb assembly and the plastic shell.
 
 ## Export design files
 
-- Open project in [easyeda-pro](https://easyeda.com/).
-- Open PCB "PCB1".
-- Click menu "Export->Bill Of Materials (BOM)". Creates file "BOM_Board1_PCB1_2024-10-10.xlsx"
-- Click menu "Export->PCB Fabrication File (Gerber)". Creates file "Gerber_PCB1_2024-10-10.zip"
-- Click menu "Export->Pick and Place File". Creates file  "PickAndPlace_PCB1_2024-10-10.xlsx"
-- Click menu "Export->3D Shell File". Creates file "3DShell_PCB1.zip".
+The board has been designed in [easyeda-pro](https://easyeda.com/).
+
+- Open the project url [https://oshwlab.com/koendv/at32f435-board](https://oshwlab.com/koendv/at32f435-board) in a web browser.
+- Scroll down to PCB "PCB1".
+- Click "Open in editor".
+- Click menu "Export->Bill Of Materials (BOM)".
+- Question "The device standardisation will check...". Click "Have been checked...". Click "Export BOM".
+- Click "Save". Creates file "BOM_Board1_PCB1_2024-10-10.xlsx"
+- Click menu "Export->PCB Fabrication File (Gerber)". Click "Export Gerber".
+- Question "Do you want to check the DRC first?". Click "No, continue exporting".
+- Click "Save". Creates file "Gerber_PCB1_2024-10-10.zip"
+- Click menu "Export->Pick and Place File". Click "Export".
+- Click "Save". Creates file  "PickAndPlace_PCB1_2024-10-10.xlsx"
+- Click menu "Export->3D Shell File". Click "Export".
+- Click "Save". Creates file "3DShell_PCB1.zip".
 - Close easyeda-pro
 
 ## Order Box
@@ -18,7 +29,11 @@ These are my notes how to order the pcb's.
 - In browser, open [jlcpcb.com](https://jlcpcb.com/). Choose "JLC3DP - 3D printing". Click "Quote Now".
 - In browser, click "Add 3D Files". Choose files "3DShell_3DShell_PCB1_T.stl" and "3DShell_3DShell_PCB1_B.stl".
 - Choose 3D Technology: SLA (Resin)
- - Choose Material: JLC Black Resin.
+ - Choose Material:
+     - white: 9600 resin (cheapest)
+     - transparent: 8001 resin
+     - black: JLC Black Resin.
+ - Product description: Choose "Enclosure, Block, Plate, Cylinder Category -> Plastic Enclosure - HS Code 392690"
  - Choose Shipping: Global Standard Direct Line.
  - Warning appears: "smaller than 0.8mm wall thickness detected. There might be risks of crack, damage, deformation, loss of details. Are you able to take the risks?". Choose "yes".
  - Order.

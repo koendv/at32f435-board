@@ -1,6 +1,8 @@
 # compiling rt-thread for at32f435
 
-This page explains the steps needed to compile rt-thread for the at32f435-board.
+[![at32f435 board](doc/at32f435-board/picture_small.webp)](https://raw.githubusercontent.com/koendv/at32f435-board/refs/heads/main/doc/at32f435-board/picture.webp)
+
+This page lists the steps needed to compile rt-thread for the at32f435-board.
 
 The RT-Thread operating system has an IDE, [RT-Thread Studio](https://www.rt-thread.io/studio.html),  and a command-line build system, [env](https://github.com/RT-Thread/env). This document uses the command line on linux, but using the IDE on windows works too.
 
@@ -12,7 +14,7 @@ Set up the source tree.
 git clone https://github.com/RT-Thread/rt-thread
 cd rt-thread/
 # rt-thread version
-git checkout bdf5a1fb092fe3749a48098e06ae7e01815ec36f
+git checkout ebe2926cd610661e210b70be1a22bac13923f4fb
 cd bsp/at32/
 git clone https://github.com/koendv/at32f435-board/
 cd at32f435-board
@@ -114,50 +116,6 @@ Transfer rate: 23 KB/sec, 971 bytes/write.
 # console output
 
 When the board boots, console output is on the serial port. If the board is connected to usb, the console then switches to the usb serial.
-
-Console output begins on the UART1 serial port:
-```
- \ | /
-- RT -     Thread Operating System
- / | \     5.2.0 build Nov  5 2024 07:00:04
- 2006 - 2024 Copyright by RT-Thread team
-[I/EEPROM] AT24C256 eeprom ok
-[I/CAN] can1 canbus init ok
-[I/MOUNT] rom mount on '/' ok
-[I/SFUD] Found a Winbond flash chip. Size is 16777216 bytes.
-[I/SFUD] norflash0 flash device initialized successfully.
-[I/SFUD] Probe SPI flash norflash0 by SPI device spi20 success.
-[D/FAL] (fal_flash_init:47) Flash device |                norflash0 | addr: 0x00000000 | len: 0x01000000 | blk_size: 0x00001000 |
-initialized finish.
-[I/FAL] ==================== FAL partition table ====================
-[I/FAL] | name       | flash_dev |   offset   |    length  |
-[I/FAL] -------------------------------------------------------------
-[I/FAL] | filesystem | norflash0 | 0x00000000 | 0x01000000 |
-[I/FAL] =============================================================
-[I/FAL] RT-Thread Flash Abstraction Layer initialize success.
-[I/FAL] The FAL block device (filesystem) created successfully
-[I/MOUNT] spi flash mount on /flash ok
-boot
-msh />[I/LVGL] [Info]   (0.000, +0)      lv_init: begin lv_init.c:139
-```
-Console output then continues on the usb serial, and the shell prompt appears:
-```
-msh />free
-total    : 498736
-used     : 86672
-maximum  : 92184
-available: 412064
-msh />
-```
-Insert an sd card:
-```
-[I/SDCARD] sd card inserted
-[I/SDIO] SD card capacity 7761920 KB.
-[I/SDIO] sd: switch to High Speed / SDR25 mode
-[D/SDIO] probe mmcsd block device!
-found part[0], begin: 0, size: 7.411GB
-[I/SDCARD] sd card inserted, mounted
-```
 
 rt-thread also supports console output on SEGGER RTT.
 
