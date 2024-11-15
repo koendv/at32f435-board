@@ -53,7 +53,7 @@ const struct dfs_mount_tbl mount_table[] =
 #if defined(RT_USING_SDIO) && defined(BSP_USING_SDIO)
 
 /* switch sdcard power on / off */
-static void sdcard_power_on(rt_bool_t power)
+void sdcard_power_on(rt_bool_t power)
 {
     rt_pin_write(SD_ON_PIN, power ? PIN_HIGH : PIN_LOW);
 }
@@ -65,7 +65,7 @@ rt_bool_t sdcard_is_inserted()
 }
 
 /* true if sd0 is mounted on /sdcard */
-static rt_bool_t sdcard_is_mounted()
+rt_bool_t sdcard_is_mounted()
 {
     /* XXX in dfs_v2: use dfs_mnt_dev_lookup() instead */
     rt_device_t   dev_id = RT_NULL;
@@ -179,7 +179,7 @@ void sdcard_init()
     rt_pin_irq_enable(SD_DETECT_PIN, PIN_IRQ_ENABLE);
 }
 
-int sdio_init_app()
+static int sdcard_init_app()
 {
     /* mount sdcard at boot */
     if (sdcard_is_inserted())
@@ -187,22 +187,23 @@ int sdio_init_app()
         /* wait for power supply to settle */
         rt_thread_mdelay(500);
         /* mount sdcard in background */
-        rt_timer_start(sdcard_change_tim);
+        if (sdcard_change_tim)
+            rt_timer_start(sdcard_change_tim);
     }
     return RT_EOK;
 }
 
-int sdio_init_board()
+static int sdcard_init_board()
 {
     sdio_reset(SDIO1);
     return RT_EOK;
 }
 
 #if 0
-INIT_APP_EXPORT(sdio_init_app);
+INIT_APP_EXPORT(sdcard_init_app);
 #endif
 
-INIT_BOARD_EXPORT(sdio_init_board);
+INIT_BOARD_EXPORT(sdcard_init_board);
 
 MSH_CMD_EXPORT_ALIAS(sdcard_mount, sdmount, mount sd card);
 MSH_CMD_EXPORT_ALIAS(sdcard_unmount, sdunmount, unmount sd card);
