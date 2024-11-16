@@ -10,7 +10,6 @@
  * - console response: "t10080123456789ABCDEF"
  * - shell command: canstat can1
  * - console response: 1 package sent, 1 package received, no errors.
- * XXX needs testing on real bus.
  */
 
 #include <rtthread.h>
