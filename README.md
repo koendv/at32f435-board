@@ -11,7 +11,7 @@ A small handheld device, with enough resources for projects.
 ## hardware
 
 - Artery (雅特力) [AT32F435RGT7](https://www.arterychip.com/en/product/AT32F435.jsp), 1024 kbyte flash, 512 kbyte ram, 288 MHz.
-- the first 256kbytes flash is zero wait state.
+- choice between 384kbyte ram and 256kbyte zero wait state flash, or 512kbyte ram and 128kbyte zero wait state flash.
 - 280x240 LCD display with capacitive touch
 - ambient light sensor to set LCD brightness
 - SD card.
