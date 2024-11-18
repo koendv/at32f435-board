@@ -68,6 +68,7 @@
 #define RT_USING_USER_MAIN
 #define RT_MAIN_THREAD_STACK_SIZE 2048
 #define RT_MAIN_THREAD_PRIORITY 10
+#define RT_USING_LEGACY
 #define RT_USING_MSH
 #define RT_USING_FINSH
 #define FINSH_USING_MSH
@@ -147,6 +148,7 @@
 #define RT_SFUD_USING_SFDP
 #define RT_SFUD_USING_FLASH_INFO_TABLE
 #define RT_SFUD_SPI_MAX_HZ 36000000
+#define RT_USING_WDT
 #define RT_USING_PIN
 #define RT_USING_HWTIMER
 /* end of Device Drivers */
@@ -166,6 +168,7 @@
 
 /* POSIX (Portable Operating System Interface) layer */
 
+#define RT_USING_POSIX_FS
 
 /* Interprocess Communication (IPC) */
 
@@ -256,6 +259,52 @@
 /* XML: Extensible Markup Language */
 
 /* end of XML: Extensible Markup Language */
+#define PKG_USING_MICROPYTHON
+
+/* Hardware Module */
+
+#define MICROPYTHON_USING_MACHINE_I2C
+#define MICROPYTHON_USING_MACHINE_SPI
+#define MICROPYTHON_USING_MACHINE_UART
+#define MICROPYTHON_USING_MACHINE_RTC
+#define MICROPYTHON_USING_MACHINE_PWM
+#define MICROPYTHON_USING_MACHINE_ADC
+#define MICROPYTHON_USING_MACHINE_WDT
+#define MICROPYTHON_USING_MACHINE_TIMER
+#define MICROPYTHON_USING_NETWORK
+/* end of Hardware Module */
+
+/* System Module */
+
+#define MICROPYTHON_USING_UOS
+#define MICROPYTHON_USING_THREAD
+#define MICROPYTHON_USING_USELECT
+#define MICROPYTHON_USING_UCTYPES
+#define MICROPYTHON_USING_UERRNO
+/* end of System Module */
+
+/* Tools Module */
+
+#define MICROPYTHON_USING_CMATH
+#define MICROPYTHON_USING_UBINASCII
+#define MICROPYTHON_USING_UHASHLIB
+#define MICROPYTHON_USING_UHEAPQ
+#define MICROPYTHON_USING_UJSON
+#define MICROPYTHON_USING_URE
+#define MICROPYTHON_USING_UZLIB
+#define MICROPYTHON_USING_URANDOM
+/* end of Tools Module */
+
+/* Network Module */
+
+/* end of Network Module */
+
+/* User Extended Module */
+
+/* end of User Extended Module */
+#define PKG_MICROPYTHON_HEAP_SIZE 8192
+#define PKG_USING_MICROPYTHON_V11300
+#define PKG_MICROPYTHON_VER_NUM 0x11300
 /* end of language packages */
 
 /* multimedia packages */
