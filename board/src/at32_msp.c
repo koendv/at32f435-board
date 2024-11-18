@@ -595,13 +595,18 @@ void at32_msp_sdram_init(void *instance)
 
 #endif /* BSP_USING_SDRAM */
 
-#ifdef BSP_USING_USBOTG
+#if defined(RT_USING_CHERRYUSB) || defined(BSP_USING_USBOTG)
 void at32_msp_usb_init(void *instance)
 {
+#if 1
     /* usb clock from external crystal */
     usb_clk48_s clk_s = USB_CLK_HEXT;
+#else
+    /* usb clock from internal oscillator */
+    usb_clk48_s clk_s = USB_CLK_HICK;
+#endif
 
-#if defined (BSP_USING_HOST_USBOTG1) || defined (BSP_USING_DEVICE_USBOTG1)
+#if defined(RT_USING_CHERRYUSB) || defined(BSP_USING_HOST_USBOTG1) || defined(BSP_USING_DEVICE_USBOTG1)
     crm_periph_clock_enable(CRM_OTGFS1_PERIPH_CLOCK, TRUE);
 #endif
 
