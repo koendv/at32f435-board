@@ -8,7 +8,7 @@ The RT-Thread operating system has an IDE, [RT-Thread Studio](https://www.rt-thr
 
 ### source tree
 
-Set up the source tree.
+Set up the source tree. The patches are explained in `patches/README.md`.
 
 ```sh
 git clone https://github.com/RT-Thread/rt-thread
@@ -22,9 +22,12 @@ pkgs --update
 cd packages/LVGL-v9.1.0/
 patch -p0 < ../../patches/lvgl-9.1.0-event-double-clicked.patch
 patch -p0 < ../../patches/lvgl-9.1.0-rtthread.patch
+cd ../micropython-v1.13.0/
+patch -p1 <  ../../patches/micropython-v1.13.0.patch
 # back to rt-thread top
 cd ../../../../..
 patch -p1 < bsp/at32/at32f435-board/patches/at32f435_437_can.patch
+patch -p1 < bsp/at32/at32f435-board/patches/usb_dc_dwc2.patch
 ```
 ### compiling
 Set up the [xpack](https://github.com/xpack-dev-tools/arm-none-eabi-gcc-xpack/releases/tag/v12.3.1-1.2) arm-none-eabi-gcc compiler.

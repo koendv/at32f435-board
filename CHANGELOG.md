@@ -7,3 +7,4 @@ This is where I write down the progress of the project.
 - 2024-10-24 hse and lse crystals ok, rt-thread boots
 - 2024-11-05 release sources on github
 - 2024-11-07 sd_detect pin with external pull-up
+- 2024-11-17 compiled micropython

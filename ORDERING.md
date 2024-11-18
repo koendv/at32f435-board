@@ -39,6 +39,7 @@ The board has been designed in [easyeda-pro](https://easyeda.com/).
  - Order.
  
 ## Order PCB Assembly
+ This orders pcb assembly for two boards with C3029577 AT32F435RGT7 (1Mbyte flash). For 4 Mbyte flash, order with C5178940 AT32F435RMT7.
  
  - In browser, open [jlcpcb.com](https://jlcpcb.com/). Click "Instant Quote".
  - Click "Add gerber file". Choose file "Gerber_PCB1_2024-10-10.zip".
@@ -54,7 +55,8 @@ The board has been designed in [easyeda-pro](https://easyeda.com/).
  - Click "Process BOM and CPL".
  - Error appears. "The below parts won't be assembled due to data missing.
 ... designators don't exist in the BOM file.". Click "Continue".
-- Bill of Materials. If all parts available, click "Next".
+- Bill of Materials.
+- If all parts available, click "Next".
 - If "parts inventory shortage", pre-order  parts, or substitute parts. Search substitute using looking glass next to part. When all parts confirmed, Click "Next".
 - Component placement page. Click "Next".
 - Quote and order page.

@@ -87,6 +87,14 @@ Insert an sd card:
 found part[0], begin: 0, size: 7.411GB
 [I/SDCARD] sd card inserted, mounted
 ```
+Start micropython:
+```
+msh />python
+MicroPython v1.13-148-ged7ddd4 on 2020-11-03; Universal python platform with RT-Thread
+Type "help()" for more information.
+>>>
+```
+With rt-thread, lvgl and micropython the 1 MByte flash of a AT32F435RGT7 is full. The 4MByte flash of a AT32F435RMT7 still has room.
 
 ## changelog
 [Changelog](CHANGELOG.md) where I keep track of progress.

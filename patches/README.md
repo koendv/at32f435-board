@@ -22,3 +22,10 @@
 
     [PR](https://github.com/RT-Thread/rt-thread/pull/9645) fix dfs_pcache compilation error if no mmu.h
 
+- usb_dc_dwc2.patch
+
+    Patch needed when using Cherryusb instead of legacy usb. See also board/src/at32_msp.c
+
+- micropython-v1.13.0.patch
+
+    Patch to compile micropython as rt-thread package. 
