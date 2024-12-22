@@ -42,9 +42,8 @@ Notes about [ordering assembled pcb's](ORDERING.md) and 3d-printed enclosure fro
 
 ## running
 
-When the board boots, console output is on the serial port. If the board is connected to usb, the console then switches to the usb serial.
+Console output is on the UART1 serial port:
 
-Console output begins on the UART1 serial port:
 ```
  \ | /
 - RT -     Thread Operating System
@@ -69,16 +68,22 @@ initialized finish.
 boot
 msh />[I/LVGL] [Info]   (0.000, +0)      lv_init: begin lv_init.c:139
 ```
-Console output then continues on the usb serial, and the shell prompt appears:
+
+CherryUSB is running, and two USB serial ports appear:
+
 ```
-msh />free
-total    : 498736
-used     : 86672
-maximum  : 92184
-available: 412064
-msh />
+[19770.507275] usb 3-1: new full-speed USB device number 27 using xhci_hcd
+[19770.636704] usb 3-1: New USB device found, idVendor=ffff, idProduct=ffff, bcdDevice= 1.00
+[19770.636740] usb 3-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[19770.636750] usb 3-1: Product: CherryUSB CDC DEMO
+[19770.636758] usb 3-1: Manufacturer: CherryUSB
+[19770.636765] usb 3-1: SerialNumber: 2022123456
+[19770.642940] cdc_acm 3-1:1.0: ttyACM0: USB ACM device
+[19770.644212] cdc_acm 3-1:1.2: ttyACM1: USB ACM device
 ```
+
 Insert an sd card:
+
 ```
 [I/SDCARD] sd card inserted
 [I/SDIO] SD card capacity 7761920 KB.
@@ -87,16 +92,20 @@ Insert an sd card:
 found part[0], begin: 0, size: 7.411GB
 [I/SDCARD] sd card inserted, mounted
 ```
+
 Start micropython:
+
 ```
 msh />python
 MicroPython v1.13-148-ged7ddd4 on 2020-11-03; Universal python platform with RT-Thread
 Type "help()" for more information.
 >>>
 ```
+
 With rt-thread, lvgl and micropython the 1 MByte flash of a AT32F435RGT7 is full. The 4MByte flash of a AT32F435RMT7 still has room.
 
 ## changelog
+
 [Changelog](CHANGELOG.md) where I keep track of progress.
 
 ## links
