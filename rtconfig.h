@@ -254,52 +254,6 @@
 /* XML: Extensible Markup Language */
 
 /* end of XML: Extensible Markup Language */
-#define PKG_USING_MICROPYTHON
-
-/* Hardware Module */
-
-#define MICROPYTHON_USING_MACHINE_I2C
-#define MICROPYTHON_USING_MACHINE_SPI
-#define MICROPYTHON_USING_MACHINE_UART
-#define MICROPYTHON_USING_MACHINE_RTC
-#define MICROPYTHON_USING_MACHINE_PWM
-#define MICROPYTHON_USING_MACHINE_ADC
-#define MICROPYTHON_USING_MACHINE_WDT
-#define MICROPYTHON_USING_MACHINE_TIMER
-#define MICROPYTHON_USING_NETWORK
-/* end of Hardware Module */
-
-/* System Module */
-
-#define MICROPYTHON_USING_UOS
-#define MICROPYTHON_USING_THREAD
-#define MICROPYTHON_USING_USELECT
-#define MICROPYTHON_USING_UCTYPES
-#define MICROPYTHON_USING_UERRNO
-/* end of System Module */
-
-/* Tools Module */
-
-#define MICROPYTHON_USING_CMATH
-#define MICROPYTHON_USING_UBINASCII
-#define MICROPYTHON_USING_UHASHLIB
-#define MICROPYTHON_USING_UHEAPQ
-#define MICROPYTHON_USING_UJSON
-#define MICROPYTHON_USING_URE
-#define MICROPYTHON_USING_UZLIB
-#define MICROPYTHON_USING_URANDOM
-/* end of Tools Module */
-
-/* Network Module */
-
-/* end of Network Module */
-
-/* User Extended Module */
-
-/* end of User Extended Module */
-#define PKG_MICROPYTHON_HEAP_SIZE 8192
-#define PKG_USING_MICROPYTHON_V11300
-#define PKG_MICROPYTHON_VER_NUM 0x11300
 /* end of language packages */
 
 /* multimedia packages */
@@ -321,6 +275,12 @@
 
 /* tools packages */
 
+#define PKG_USING_BLACKMAGIC
+#define BLACKMAGIC_ENABLE_RTT
+#define BLACKMAGIC_ENABLE_RTT_IDENT
+#define BLACKMAGIC_RTT_IDENT "SEGGER%RTT"
+#define PKG_USING_BLACKMAGIC_LATEST_VERSION
+#define BLACKMAGIC_VERSION "latest"
 /* end of tools packages */
 
 /* system packages */
