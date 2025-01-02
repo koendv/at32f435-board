@@ -14,4 +14,4 @@ static int get_usb_serial_number()
     return RT_EOK;
 }
 
-INIT_APP_EXPORT(get_usb_serial_number);
+INIT_DEVICE_EXPORT(get_usb_serial_number);

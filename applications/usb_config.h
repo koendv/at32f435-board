@@ -3,8 +3,8 @@
  *
  * SPDX-License-Identifier: Apache-2.0
  */
-#ifndef CHERRYUSB_CONFIG_H
-#define CHERRYUSB_CONFIG_H
+#ifndef USB_CONFIG_H
+#define USB_CONFIG_H
 
 /* ================ USB common Configuration ================ */
 
@@ -32,6 +32,8 @@
 #define USB_NOCACHE_RAM_SECTION __attribute__((section(".noncacheable")))
 
 /* ================= USB Device Stack Configuration ================ */
+
+#define CONFIG_USBDEV_ADVANCE_DESC
 
 #define CONFIG_USBDEV_MAX_BUS 1    // for now, bus num must be 1 except hpm ip
 

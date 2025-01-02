@@ -199,7 +199,7 @@ static int sdcard_init_board()
     return RT_EOK;
 }
 
-#if 0
+#if 1
 INIT_APP_EXPORT(sdcard_init_app);
 #endif
 

@@ -3,6 +3,16 @@
 
 #include <rtthread.h>
 
+#define LED0_PIN             LED1_PIN
+#define TARGET_SWCLK_DIR_PIN GET_PIN(A, 2)
+#define TARGET_SWDIO_DIR_PIN GET_PIN(A, 3)
+#define TARGET_SWCLK_PIN     GET_PIN(A, 4)
+#define TARGET_SWDIO_PIN     GET_PIN(A, 5)
+#define TARGET_TDI_PIN       GET_PIN(A, 6)
+#define TARGET_SWO_PIN       GET_PIN(A, 7)
+#define TARGET_RST_IN_PIN    GET_PIN(C, 4)
+#define TARGET_RST_PIN       GET_PIN(C, 5)
+
 #define TOUCH_INT_PIN        GET_PIN(C, 13)
 #define TOUCH_RST_PIN        GET_PIN(C, 0)
 #define DISP_RST_PIN         GET_PIN(C, 1)

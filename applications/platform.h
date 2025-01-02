@@ -5,14 +5,16 @@
 #include <time.h>
 #include <strings.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <drv_gpio.h>
+#include <pinout.h>
 
 extern bool running_status;
 
-#define PLATFORM_IDENT "rt-thread "
+#define PLATFORM_IDENT "AT32F435 "
 
 /*
  The SWD and JTAG frequency is controlled by a delay loop.
@@ -39,21 +41,32 @@ extern bool running_status;
 #define BLACKMAGIC_DELAY_CONSTANT 14300
 #define BLACKMAGIC_FASTCLOCK      910000
 
+#if 1
+/* aux serial port - connect to target console */
+#define AUX_UART          "uart3"
+#define AUX_DEFAULT_SPEED 115200U
+#define AUX_RX_BUFSIZE    BSP_UART3_RX_BUFSIZE
+#endif
+
+#if 1
+/* rtt_if.c rtt input and output via cdc1 */
+#define RTT_IN_CDC1
+#define RTT_UP_BUF_SIZE   (2048U + 8U)
+#define RTT_DOWN_BUF_SIZE 256U
+#endif
+
+#if 0
+#define PLATFORM_HAS_TRACESWO
+#define SWO_ENCODING   2
+#endif
+
 /* pins. 
    Two considerations:
    - pins in same bank to allow fast SWD/JTAG writes
    - easy pcb layout from pins to a level translator SN74AXC4T774PWR
  */
 
-#define LED_IDLE_RUN         GET_PIN(C, 6)
-#define TARGET_SWCLK_DIR_PIN GET_PIN(A, 2)
-#define TARGET_SWDIO_DIR_PIN GET_PIN(A, 3)
-#define TARGET_SWCLK_PIN     GET_PIN(A, 4)
-#define TARGET_SWDIO_PIN     GET_PIN(A, 5)
-#define TARGET_TDI_PIN       GET_PIN(A, 6)
-#define TARGET_SWO_PIN       GET_PIN(A, 7)
-#define TARGET_RST_IN_PIN    GET_PIN(B, 10)
-#define TARGET_RST_PIN       GET_PIN(B, 13)
+#define LED_IDLE_RUN         LED1_PIN
 
 /* target reset pin */
 #define NRST_IN_PIN  TARGET_RST_IN_PIN

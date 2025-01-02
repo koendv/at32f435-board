@@ -38,4 +38,4 @@ int usbd_app_init(void)
     return 0;
 }
 
-INIT_APP_EXPORT(usbd_app_init);
+INIT_COMPONENT_EXPORT(usbd_app_init);

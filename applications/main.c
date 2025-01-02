@@ -13,9 +13,6 @@
 #include <rtconfig.h>
 #include "drv_common.h"
 #include "drv_gpio.h"
-#ifdef PKG_USING_VCONSOLE
-#include <vconsole.h>
-#endif
 
 #include "pinout.h"
 
@@ -32,14 +29,6 @@ int main(void)
     rt_kprintf("boot\r\n");
     /* set led1 pin mode to output */
     rt_pin_mode(LED1_PIN, PIN_MODE_OUTPUT);
-
-#if defined(PKG_USING_VCONSOLE) && defined(RT_USB_DEVICE_CDC)
-    /* on legacy usb stack: switching console to usb serial */
-    rt_device_t vcom_dev = RT_NULL;
-    vcom_dev             = rt_device_find("vcom");
-    if (vcom_dev)
-        vconsole_switch(vcom_dev);
-#endif
 
     while (1) blink_led();
 }
