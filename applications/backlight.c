@@ -16,6 +16,10 @@
 #include "lvgl.h"
 #endif
 
+#define DBG_TAG "LIGHT"
+#define DBG_LVL DBG_ERR
+#include <rtdbg.h>
+
 #include "pinout.h"
 
 #define ADC_DEV_NAME      "adc1"               /* ADC device name */
@@ -58,7 +62,7 @@ void adc_read_func()
     adc_dev = (rt_adc_device_t)rt_device_find(ADC_DEV_NAME);
     if (adc_dev == RT_NULL)
     {
-        rt_kprintf("adc error\n");
+        LOG_E("adc error");
         return;
     }
     rt_adc_enable(adc_dev, ADC_LIGHT_CHANNEL);
@@ -91,7 +95,7 @@ void adc_read_func()
 #endif
 
         /* set pwm duty cycle */
-        //rt_kprintf("led %d %d\r\n", pwm_period, pwm_duty_cycle);
+        LOG_I("led %d %d\r\n", pwm_period, pwm_duty_cycle);
         tmr_channel_value_set(TMR_NUMBER, TMR_CHANNEL, pwm_duty_cycle);
         rt_thread_mdelay(UPDATE_DELAY); // update twice per second
     }
