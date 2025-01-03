@@ -66,8 +66,11 @@ int mount_spiflash()
 
     if (dfs_mount(flash_dev->parent.name, "/flash", "elm", 0, 0) != 0)
     {
-        LOG_I("Please format spi flash with mkfs -t elm");
 #if 0
+        LOG_I("Please format spi flash with mkfs -t elm");
+        return -RT_ERROR;
+#else
+        /* format flash */
         LOG_I("formatting spi flash");
         if (dfs_mkfs("elm", flash_dev->parent.name) != 0)
         {
