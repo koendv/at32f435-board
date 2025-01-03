@@ -17,7 +17,7 @@
 
 #define LCD_H_RES        240
 #define LCD_V_RES        280
-#define LCD_BUF_LINES    40
+#define LCD_BUF_LINES    70
 #define SPI_BUS          "spi1"
 #define SPI_DEV          "spi10"
 #define DISP_CS_GPIO     GPIOC
