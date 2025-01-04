@@ -199,11 +199,8 @@ static int sdcard_init_board()
     return RT_EOK;
 }
 
-#if 1
-INIT_APP_EXPORT(sdcard_init_app);
-#endif
-
 INIT_BOARD_EXPORT(sdcard_init_board);
+INIT_APP_EXPORT(sdcard_init_app);
 
 MSH_CMD_EXPORT_ALIAS(sdcard_mount, sdmount, mount sd card);
 MSH_CMD_EXPORT_ALIAS(sdcard_unmount, sdunmount, unmount sd card);

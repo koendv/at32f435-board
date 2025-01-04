@@ -2,11 +2,24 @@
  * Copyright (c) 2024, sakumisu
  *
  * SPDX-License-Identifier: Apache-2.0
- * https://github.com/cherry-embedded/CherryDAP
+ *
+ * Adapted from CherryDAP, https://github.com/cherry-embedded/CherryDAP
+ *
  */
 
+/* To add the optional msc device, select
+       RT-Thread Components  --->
+       Device Drivers  --->
+   [*] Using USB with CherryUSB  --->
+   [*] Enable usb device mode  --->
+   [*] Enable usb msc device
+ */
+
+#include <rtthread.h>
+#include <rtconfig.h>
 #include "usbd_core.h"
 #include "usbd_cdc_acm.h"
+#include "usbd_msc.h"
 #include "dap_config.h"
 #include "usb_desc.h"
 
@@ -23,11 +36,17 @@
 
 /*!< config descriptor size */
 #define CMSIS_DAP_INTERFACE_SIZE (9 + 7 + 7)
-#define USB_CONFIG_SIZE          (9 + CMSIS_DAP_INTERFACE_SIZE + CDC_ACM_DESCRIPTOR_LEN * 2)
-#define INTF_NUM                 (1 + 2 * 2)
 #define DAP_PACKET_SIZE          DAP_CONFIG_PACKET_SIZE
 
-#ifdef CONFIG_USB_HS
+#ifdef RT_CHERRYUSB_DEVICE_MSC
+#define USB_CONFIG_SIZE (9 + CMSIS_DAP_INTERFACE_SIZE + CDC_ACM_DESCRIPTOR_LEN * 2 + MSC_DESCRIPTOR_LEN)
+#define INTF_NUM        (1 + 2 * 2 + 1)
+#else
+#define USB_CONFIG_SIZE (9 + CMSIS_DAP_INTERFACE_SIZE + CDC_ACM_DESCRIPTOR_LEN * 2)
+#define INTF_NUM        (1 + 2 * 2)
+#endif
+
+#ifdef RT_CHERRYUSB_DEVICE_SPEED_HS
 #if DAP_PACKET_SIZE != 512
 #error "DAP_PACKET_SIZE must be 512 in hs"
 #endif
@@ -162,8 +181,11 @@ static const uint8_t config_descriptor[] = {
     USB_INTERFACE_DESCRIPTOR_INIT(DAP_INTF, 0x00, 0x02, 0xFF, 0x00, 0x00, 0x05),
     USB_ENDPOINT_DESCRIPTOR_INIT(DAP_OUT_EP, USB_ENDPOINT_TYPE_BULK, DAP_PACKET_SIZE, 0x00),
     USB_ENDPOINT_DESCRIPTOR_INIT(DAP_IN_EP, USB_ENDPOINT_TYPE_BULK, DAP_PACKET_SIZE, 0x00),
-    CDC_ACM_DESCRIPTOR_INIT(CDC0_INTF, CDC0_INT_EP, CDC0_OUT_EP, CDC0_IN_EP, CDC_MAX_MPS, 0x02),
-    CDC_ACM_DESCRIPTOR_INIT(CDC1_INTF, CDC1_INT_EP, CDC1_OUT_EP, CDC1_IN_EP, CDC_MAX_MPS, 0x02),
+    CDC_ACM_DESCRIPTOR_INIT(CDC0_INTF, CDC0_INT_EP, CDC0_OUT_EP, CDC0_IN_EP, CDC_MAX_MPS, 0x06),
+    CDC_ACM_DESCRIPTOR_INIT(CDC1_INTF, CDC1_INT_EP, CDC1_OUT_EP, CDC1_IN_EP, CDC_MAX_MPS, 0x07),
+#ifdef RT_CHERRYUSB_DEVICE_MSC
+    MSC_DESCRIPTOR_INIT(MSC_INTF, MSC_OUT_EP, MSC_IN_EP, MSC_MAX_MPS, 0x08),
+#endif
 };
 
 static const uint8_t other_speed_config_descriptor[] = {
@@ -171,8 +193,11 @@ static const uint8_t other_speed_config_descriptor[] = {
     USB_INTERFACE_DESCRIPTOR_INIT(DAP_INTF, 0x00, 0x02, 0xFF, 0x00, 0x00, 0x05),
     USB_ENDPOINT_DESCRIPTOR_INIT(DAP_OUT_EP, USB_ENDPOINT_TYPE_BULK, DAP_PACKET_SIZE, 0x00),
     USB_ENDPOINT_DESCRIPTOR_INIT(DAP_IN_EP, USB_ENDPOINT_TYPE_BULK, DAP_PACKET_SIZE, 0x00),
-    CDC_ACM_DESCRIPTOR_INIT(CDC0_INTF, CDC0_INT_EP, CDC0_OUT_EP, CDC0_IN_EP, CDC_MAX_MPS, 0x02),
-    CDC_ACM_DESCRIPTOR_INIT(CDC1_INTF, CDC1_INT_EP, CDC1_OUT_EP, CDC1_IN_EP, CDC_MAX_MPS, 0x02),
+    CDC_ACM_DESCRIPTOR_INIT(CDC0_INTF, CDC0_INT_EP, CDC0_OUT_EP, CDC0_IN_EP, CDC_MAX_MPS, 0x06),
+    CDC_ACM_DESCRIPTOR_INIT(CDC1_INTF, CDC1_INT_EP, CDC1_OUT_EP, CDC1_IN_EP, CDC_MAX_MPS, 0x07),
+#ifdef RT_CHERRYUSB_DEVICE_MSC
+    MSC_DESCRIPTOR_INIT(MSC_INTF, MSC_OUT_EP, MSC_IN_EP, MSC_MAX_MPS, 0x08),
+#endif
 };
 
 static char *string_descriptors[] = {
@@ -184,6 +209,7 @@ static char *string_descriptors[] = {
     "CMSIS-DAP", /* CMSIS-DAP probe */
     "GDB", /* GDB Server */
     "UART", /* UART Port */
+    "SD CARD", /* MSC */
 };
 
 struct usb_msosv2_descriptor msosv2_desc = {
@@ -304,6 +330,9 @@ static struct usbd_interface cdc0_intf0;
 static struct usbd_interface cdc0_intf1;
 static struct usbd_interface cdc1_intf0;
 static struct usbd_interface cdc1_intf1;
+#ifdef RT_CHERRYUSB_DEVICE_MSC
+static struct usbd_interface msc_intf;
+#endif
 
 void cdc_acm_init(uint8_t busid, uintptr_t reg_base)
 {
@@ -322,6 +351,10 @@ void cdc_acm_init(uint8_t busid, uintptr_t reg_base)
     usbd_add_interface(busid, usbd_cdc_acm_init_intf(busid, &cdc1_intf1));
     usbd_add_endpoint(busid, &cdc1_out_ep);
     usbd_add_endpoint(busid, &cdc1_in_ep);
+
+#ifdef RT_CHERRYUSB_DEVICE_MSC
+    usbd_add_interface(busid, usbd_msc_init_intf(busid, &msc_intf, MSC_OUT_EP, MSC_IN_EP));
+#endif
 
     usbd_initialize(busid, reg_base, usbd_event_handler);
 }

@@ -2,13 +2,16 @@
 #define USB_DESC_H
 
 #include <rtthread.h>
+#include <rtconfig.h>
 #include <stdbool.h>
 
 /*!< usb packet size */
-#ifdef CONFIG_USB_HS
+#ifdef RT_CHERRYUSB_DEVICE_SPEED_HS
 #define CDC_MAX_MPS 512
+#define MSC_MAX_MPS 512
 #else
 #define CDC_MAX_MPS 64
+#define MSC_MAX_MPS 64
 #endif
 
 /*!< usb bus number */
@@ -30,6 +33,7 @@
 #define DAP_INTF  0x00
 #define CDC0_INTF 0x01
 #define CDC1_INTF 0x03
+#define MSC_INTF  0x05
 
 void cdc_acm_init(uint8_t busid, uintptr_t reg_base);
 

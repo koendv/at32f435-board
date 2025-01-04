@@ -17,7 +17,7 @@ then
     -ex 'monitor swd' \
     -ex 'attach 1' \
     -ex 'load' \
-    -ex 'monitor rtt' \
-    -ex 'monitor rtt ram 0x20000000 0x20003fff' \
     -ex 'run'
+#    -ex 'monitor rtt' \
+#    -ex 'monitor rtt ram 0x20000000 0x20003fff' \
 fi
