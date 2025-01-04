@@ -29,7 +29,7 @@
 #include "sdcard.h"
 
 #undef DBG_TAG
-#define DBG_TAG "SDCARD"
+#define DBG_TAG "SD"
 #define DBG_LVL DBG_INFO
 #include <rtdbg.h>
 

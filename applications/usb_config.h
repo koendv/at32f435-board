@@ -20,10 +20,6 @@
 #define usb_malloc(size) rt_malloc(size) 
 #define usb_free(ptr)    rt_free(ptr)
 
-#ifndef CONFIG_USB_DBG_LEVEL
-#define CONFIG_USB_DBG_LEVEL USB_DBG_LOG
-#endif
-
 /* Enable print with color */
 #define CONFIG_USB_PRINTF_COLOR_ENABLE
 

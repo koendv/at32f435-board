@@ -95,7 +95,7 @@ void adc_read_func()
 #endif
 
         /* set pwm duty cycle */
-        LOG_I("led %d %d\r\n", pwm_period, pwm_duty_cycle);
+        LOG_D("led %d %d", pwm_period, pwm_duty_cycle);
         tmr_channel_value_set(TMR_NUMBER, TMR_CHANNEL, pwm_duty_cycle);
         rt_thread_mdelay(UPDATE_DELAY); // update twice per second
     }

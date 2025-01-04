@@ -14,6 +14,10 @@
 #include "drv_common.h"
 #include "drv_gpio.h"
 
+#define DBG_TAG "MAIN"
+#define DBG_LVL DBG_LOG
+#include <rtdbg.h>
+
 #include "pinout.h"
 
 void blink_led()
@@ -26,7 +30,7 @@ void blink_led()
 
 int main(void)
 {
-    rt_kprintf("boot\r\n");
+    LOG_I("boot");
     /* set led1 pin mode to output */
     rt_pin_mode(LED1_PIN, PIN_MODE_OUTPUT);
 
